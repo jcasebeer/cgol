@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <string.h>
+#include <sys/ioctl.h>
 
 enum {
     N0=1, N1=2, N2=4, N3=8, N4=16, N5=32, N6=64, N7=128, N8=256                                  
@@ -145,8 +146,17 @@ void parse_arg(int argc, char **argv)
     }
 }
 
+void set_board_size()
+{
+    struct winsize w;
+    ioctl(0, TIOCGWINSZ, &w);
+    WIDTH = w.ws_col - 2;
+    HEIGHT = w.ws_row - 4;
+}
+
 int main(int argc, char **argv)
 { 
+    set_board_size();
     parse_arg(argc, argv);
     board = calloc(WIDTH*HEIGHT, sizeof(char));
     neighbors = calloc(WIDTH*HEIGHT, sizeof(char));
