@@ -40,7 +40,7 @@ void print_info()
     for (i=0; i<9; i++)
         if (s_rule & (1<<i))
             printf("%d", i);
-    printf(" Generation: %d\n", generation);
+    printf(" Generation: %llu\n", generation);
 }
 void print_board()
 {
@@ -113,6 +113,7 @@ void apply_rule_string(char *rule_string)
                        break;
             case 's':
             case 'S':
+            case '/':
                        rule = &s_rule;
                        break;
             default:
