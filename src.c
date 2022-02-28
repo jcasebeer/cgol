@@ -21,22 +21,22 @@ int s_rule = N2 | N3;
 
 void clear_screen()
 { 
-    printf("\e[1;1H\e[2J");
+    fputs("\e[1;1H\e[2J", stdout);
 }
 
 void reset_cursor()
 {
-    printf("\e[1;1H");
+    fputs("\e[1;1H", stdout);
 }
 
 void print_info()
 {
     int i;
-    printf("B");
+    fputs("B", stdout);
     for (i=0; i<9; i++)
         if (b_rule & (1<<i))
             printf("%d", i);
-    printf("/S");
+    fputs("/S", stdout);
     for (i=0; i<9; i++)
         if (s_rule & (1<<i))
             printf("%d", i);
@@ -45,25 +45,25 @@ void print_info()
 void print_board()
 {
     int x, y;
-    printf("+");
+    fputs("+", stdout);
     for(x=0; x<WIDTH; x++)
-        printf("-");
-    printf("+\n");
+        fputs("-", stdout);
+    fputs("+\n", stdout);
 
     for(y=0; y<HEIGHT;y++) {
-        printf("|");
+        fputs("|", stdout);
         for(x=0; x<WIDTH; x++) {
             if (board[IDX(x,y)])
-                printf("O");
+                fputs("O", stdout);
             else
-                printf(" ");
+                fputs(" ", stdout);
         }
-        printf("|\n");
+        fputs("|\n", stdout);
     }
-    printf("+");
+    fputs("+", stdout);
     for(x=0; x<WIDTH; x++)
-        printf("-");
-    printf("+\n");
+        fputs("-", stdout);
+    fputs("+\n", stdout);
     print_info();
 }
 
